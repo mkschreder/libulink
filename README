@@ -1,13 +1,56 @@
 ULINK
 =====
 
-Micro data framing library for embedded applications. Ensures that we can
-separate data into packets when sending it over a serial stream such as a UART
-port. 
+Micro data framing library for embedded applications. Implements data framing
+mechanism similar to PPP. Ensures that we can separate data into packets when
+sending it over a serial stream such as a UART port. 
 
 Works on arduino. 
 
+METHOD OF OPERATION
+===================
+
+* each frame ends with frame delimiter (0x7e)
+* each frame delimiter inside the data is escaped using escape sequence (0x7d)
+* each escape character in data is also escaped
+* each escaped character is XORed with 0x20 before being placed inside the tx buffer
+
+This guarantees that 0x7d and 0x7e never occur as part of the data inside a
+packet. Upon reception, we unescape these sequences to recover the data by
+XORing the escaped characters with 0x20 again. 
+
+It is possible to pack arbitrary amounts of data and even split the data into
+smaller packets when transmitting it (such as when sending the data over a
+radio modem that supports only 64 byte packets). This library operates on
+streams of data, so when you parse out a stream of incoming data, you can parse
+as much as you receive and then continue when you receive more data by simply
+calling the parser repeatedly. The parser always stores partial packet inside
+it's buffer and resets it automatically when it receives corrupted packets. 
+
+PACKET POLICY
+=============
+
+Corrupt packets are automatically dropped. This includes: 
+
+* packets with wrong crc
+* packets shorter than 2 bytes (crc is 2 bytes)
+* packets that contain invalid escaped characters 
+
+BUILDING
+========
+
+You can cross compile this library for any platform using standard configure
+script and by passing cross compilation flags to it. 
+
+To build the library locally do: 
+
+./configure
+make 
+make install
+
 LICENSE
 =======
+
+See COPYING
 
 Copyright (c) 2016 Martin Schröder, All rights reserved. 
