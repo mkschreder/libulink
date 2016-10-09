@@ -1,0 +1,13 @@
+ULINK
+=====
+
+Micro data framing library for embedded applications. Ensures that we can
+separate data into packets when sending it over a serial stream such as a UART
+port. 
+
+Works on arduino. 
+
+LICENSE
+=======
+
+Copyright (c) 2016 Martin Schröder, All rights reserved. 
