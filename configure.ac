@@ -21,7 +21,7 @@ AC_ARG_WITH(pkgconfigdir,
 AC_SUBST([pkgconfigdir])
 AC_MSG_NOTICE([pkgconfig directory is ${pkgconfigdir}])
 
-AC_CONFIG_FILES([libulink.pc])
+AC_CONFIG_FILES([ulink.pc])
 
-AC_OUTPUT(Makefile src/Makefile test/Makefile)
+AC_OUTPUT(Makefile include/Makefile src/Makefile test/Makefile)
 

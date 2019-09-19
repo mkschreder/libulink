@@ -1,6 +1,6 @@
 @CODE_COVERAGE_RULES@
-pkgconfig_DATA=libutype.pc
+pkgconfig_DATA=ulink.pc
 ACLOCAL_AMFLAGS=-I m4
-SUBDIRS=src test
+SUBDIRS=src include test
 EXTRA_DIST=autogen.mk
 test: check

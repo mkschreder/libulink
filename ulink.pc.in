@@ -3,7 +3,7 @@ exec_prefix=@exec_prefix@
 includedir=@includedir@
 libdir=@libdir@
 
-Name: libulink
+Name: ulink
 Description: Portable micro serial port stream framing library in C
 Version: @VERSION@
 Cflags: 
